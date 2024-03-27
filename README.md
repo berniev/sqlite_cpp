@@ -1,13 +1,14 @@
-# cpp4sqlite: A C++ front-end
+# cpp4sqlite
+### A C++ front-end for SQLite
 
 sqlite is a ubiquitous single-file database offering bindings for many languages.
 
 sqlite does not have a pure C++ interface. It does however offer a C/C++ interface which we will build on.
 ### License: MIT
 ### Usage:
-#### Establish connection:
-    Connection(location, option)
-    // location typically std::string or ":memory:"
+#### Connection constructor:
+    Connection(locn, option)   -> Connection
+    // locn typically std::string or ":memory:"
     // option typically OpenOption::CREATEWRITE or OpenOption::READWRITE
 #### _Connection_ functions:
     // Single shot, can contain multiple queries separated by semicolon
