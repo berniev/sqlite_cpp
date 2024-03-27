@@ -12,11 +12,11 @@ using namespace cpp4sqlite;
 
 Connection::Connection(std::string_view const name, OpenOption flags, char const* vfs)
 {
-    if (auto const res{sqlite3_open_v2(name.data(), &sqliteDb, static_cast<int>(flags), vfs)}) {
+    if (auto const res {sqlite3_open_v2(name.data(), &sqliteDb, static_cast<int>(flags), vfs)}) {
         /**/
-        auto const err{sqlite3_errstr(res)};
+        auto const err {sqlite3_errstr(res)};
         close();
-        throw std::runtime_error(std::string{"Connection: misc error: "} + err);
+        throw std::runtime_error(std::string {"Connection: misc error: "} + err);
     }
 }
 
@@ -42,7 +42,7 @@ int Connection::affectedRows() const
 
 SqlTable Connection::quickQuery(std::string const& queryStr)
 {
-    results.clear(); // updated by callback
+    results.clear();  // updated by callback
     char* error;
     sqlite3_exec(sqliteDb, queryStr.c_str(), &callback, this, &error);
     errorMsg = fixNullStr(error);
@@ -54,7 +54,7 @@ SqlTable Connection::quickQuery(std::string const& queryStr)
 
 int Connection::processSqlite3Callback(int const count, char** values, char** names)
 {
-    SqlRow row{};
+    SqlRow row {};
     for (int i = 0; i < count; ++i) {
         row.emplace_back(names[i], fixNullStr(values[i]));
     }
@@ -69,10 +69,10 @@ PreparedStatement Connection::prepare(std::string const& queryStr, int const pre
     int const size = static_cast<int>(queryStr.size());
     char const* unused;
     if (int const res = sqlite3_prepare_v3(sqliteDb, data, size, prepFlags, &stmnt, &unused)) {
-        throw std::runtime_error(std::string{"Prepare error: "} + std::to_string(res) + " : "
-            + errorStr());
+        throw std::runtime_error(std::string {"Prepare error: "} + std::to_string(res) + " : "
+                                 + errorStr());
     }
-    PreparedStatement pStmnt{stmnt};
+    PreparedStatement pStmnt {stmnt};
     return pStmnt;
 }
 
@@ -89,22 +89,21 @@ bool Connection::getAutocommit() const
 //--------------------------------------------------------------------------------------------------
 
 Binder::Binder(sqlite3_stmt* stmnt)
-    : stmnt{stmnt}
-{
-}
+    : stmnt {stmnt}
+{}
 
 void Binder::reset()
 {
-    if (int const res{sqlite3_reset(stmnt)}) {
-        throw std::runtime_error(std::string{"Binder::reset error: "} + errString(res));
+    if (int const res {sqlite3_reset(stmnt)}) {
+        throw std::runtime_error(std::string {"Binder::reset error: "} + errString(res));
     }
     bindPosn = 0;
 }
 
 void Binder::checkBindParamCount(std::size_t const size) const
 {
-    if (std::size_t const count{static_cast<std::size_t>(sqlite3_bind_parameter_count(stmnt))}; size
-        != count) {
+    if (std::size_t const count {static_cast<std::size_t>(sqlite3_bind_parameter_count(stmnt))};
+        size != count) {
         throw std::runtime_error(size > count ? "too many bind params" : "too few bind params");
     }
 }
@@ -135,7 +134,7 @@ void Binder::bindBlob(std::string const& param) const
 void Binder::checkResult(int const res) const
 {
     if (res) {
-        std::string const err{"bind fail at posn "};
+        std::string const err {"bind fail at posn "};
         throw std::runtime_error(err + std::to_string(bindPosn));
     }
 }
@@ -143,11 +142,10 @@ void Binder::checkResult(int const res) const
 //--------------------------------------------------------------------------------------------------
 
 ResultColumn::ResultColumn(sqlite3_stmt* stmnt, int const posn)
-    : stmnt{stmnt}
-      , posn{posn}
-      , type{sqlite3_column_type(stmnt, posn)}
-{
-}
+    : stmnt {stmnt}
+    , posn {posn}
+    , type {sqlite3_column_type(stmnt, posn)}
+{}
 
 SqlColName ResultColumn::name() const
 {
@@ -181,7 +179,7 @@ std::string ResultColumn::fieldS() const
 //--------------------------------------------------------------------------------------------------
 
 Resultset::Resultset(sqlite3_stmt* stmnt)
-    : stmnt{stmnt}
+    : stmnt {stmnt}
 {
     step();
     int const count = countColumns();
@@ -192,7 +190,7 @@ Resultset::Resultset(sqlite3_stmt* stmnt)
 
 void Resultset::step()
 {
-    switch (int const res{sqlite3_step(stmnt)}) {
+    switch (int const res {sqlite3_step(stmnt)}) {
 
         case SQLITE_DONE:
             hasRow = false;
@@ -204,7 +202,7 @@ void Resultset::step()
             break;
 
         default:
-            throw std::runtime_error(std::string{"Resultset::step error: " + std::to_string(res)});
+            throw std::runtime_error(std::string {"Resultset::step error: " + std::to_string(res)});
     }
 }
 
@@ -271,9 +269,9 @@ std::optional<SqlRow> Resultset::row()
         return {};
     }
 
-    SqlRow row{};
+    SqlRow row {};
     int const colCount = countData();
-    for (int i{0}; i < colCount; ++i) {
+    for (int i {0}; i < colCount; ++i) {
         row.push_back(field(i));
     }
     step();
@@ -286,8 +284,8 @@ std::optional<SqlRowS> Resultset::rowS()
         return {};
     }
 
-    SqlRowS rowS{};
-    for (int i{0}; i < countData(); ++i) {
+    SqlRowS rowS {};
+    for (int i {0}; i < countData(); ++i) {
         rowS.push_back(fieldS(i));
     }
     step();
@@ -301,12 +299,8 @@ bool Resultset::empty() const
 
 int Resultset::toFile(std::filesystem::path const& fileSpec, FileReplace const replace) const
 {
-    if (exists(fileSpec)) {
-        if (replace != FileReplace::yes) {
-            throw std::runtime_error(std::string{"File already exists: "} + fileSpec.string());
-        }
-
-        // delete file, or will file.write overwrite it?
+    if (exists(fileSpec) && replace != FileReplace::yes) {
+        throw std::runtime_error(std::string {"File already exists: "} + fileSpec.string());
     }
     std::ofstream file(fileSpec, std::ios::binary);
     void const* blob = sqlite3_column_blob(stmnt, 0);
@@ -325,9 +319,8 @@ void Resultset::checkTypeCount(int const count) const
 //--------------------------------------------------------------------------------------------------
 
 PreparedStatement::PreparedStatement(sqlite3_stmt* stmnt)
-    : stmnt{stmnt}
-{
-}
+    : stmnt {stmnt}
+{}
 
 PreparedStatement::~PreparedStatement()
 {

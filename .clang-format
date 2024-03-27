@@ -50,6 +50,7 @@ ObjCSpaceBeforeProtocolList: true
 PackConstructorInitializers: Never
 PointerAlignment: Left
 ReflowComments: true
+SeparateDefinitionBlocks : Always
 SortIncludes: Never
 SpaceAfterCStyleCast: false
 SpaceAfterLogicalNot: false

@@ -14,7 +14,6 @@
 
 namespace cpp4sqlite
 {
-
 //--------------------------------------------------------------------------------------------------
 
 using SqlColName = std::string;
@@ -28,20 +27,21 @@ using SqlTable = std::vector<SqlRow>;
 //--------------------------------------------------------------------------------------------------
 
 enum class OpenOption
-{  // clang-format off
-    READONLY     = 0x00000001,
-    READWRITE    = 0x00000002,
-    CREATE       = 0x00000004,
-    CREATERW     = 0x00000006,
-    URI          = 0x00000008,
-    MEMORY       = 0x00000010,
-    NOMUTEX      = 0x00008000,
-    FULLMUTEX    = 0x00010000,
-    SHAREDCACHE  = 0x00020000,
-    PRIVATECACHE = 0x00040000,
-    NOFOLLOW     = 0x01000000,
-    EXRESCODE    = 0x02000000
-};  // clang-format on
+{
+    // clang-format off
+        READONLY = 0x00000001,
+        READWRITE = 0x00000002,
+        CREATE = 0x00000004,
+        CREATERW = 0x00000006,
+        URI = 0x00000008,
+        MEMORY = 0x00000010,
+        NOMUTEX = 0x00008000,
+        FULLMUTEX = 0x00010000,
+        SHAREDCACHE = 0x00020000,
+        PRIVATECACHE = 0x00040000,
+        NOFOLLOW = 0x01000000,
+        EXRESCODE = 0x02000000
+    };  // clang-format on
 
 //--------------------------------------------------------------------------------------------------
 
@@ -362,6 +362,5 @@ public:
 };
 
 //--------------------------------------------------------------------------------------------------
-
-}  // namespace sqlite_cpp
+}  // namespace cpp4sqlite
 #endif  // SQLITE_CPP_H
