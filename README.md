@@ -11,7 +11,7 @@ sqlite does not have a pure C++ interface. It does however offer a C/C++ interfa
     // option typically OpenOption::CREATEWRITE or OpenOption::READWRITE
 #### _Connection_ functions:
     // Single shot, can contain multiple queries separated by semicolon
-    std::vector<std::vector<std::pair<std::string, std::string>>> quickQuery(queryString)
+    quickQuery(queryString)    -> std::vector<std::vector<std::pair<std::string, std::string>>>
 
     // Parameterised query
     prepare(std::string)       -> Statement                                                     
@@ -23,7 +23,7 @@ sqlite does not have a pure C++ interface. It does however offer a C/C++ interfa
     // Parameterised query
     execute(param1 .. paramN)  -> Resultset 
 
-    // read file and write file to blob
+    // write file to blob
     execute(filesystem::path)  -> void
 #### _Resultset_ functions:
     // save blob to file                                                                  
