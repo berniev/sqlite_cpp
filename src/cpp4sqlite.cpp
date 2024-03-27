@@ -129,7 +129,6 @@ void Binder::bindBlob(std::string const& param) const
     checkResult(sqlite3_bind_blob(stmnt, bindPosn, &data[0], size, SQLITE_TRANSIENT));
 }
 
-// ReSharper disable once CppDFAUnreachableFunctionCall
 void Binder::checkResult(int const res) const
 {
     if (res) {
