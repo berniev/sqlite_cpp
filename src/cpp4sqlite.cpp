@@ -1,6 +1,8 @@
-//
-// Copyright 2024 by Berniev.
-//
+/*
+ Copyright (c) 2024 Berniev
+
+ Licence: MIT
+ */
 
 #include "cpp4sqlite.h"
 

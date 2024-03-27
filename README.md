@@ -3,7 +3,7 @@
 sqlite is a ubiquitous single-file database offering bindings for many languages.
 
 sqlite does not have a pure C++ interface. It does however offer a C/C++ interface which we will build on.
-
+### License: MIT
 ### Usage:
 #### Establish connection:
     Connection(location, option)

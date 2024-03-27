@@ -1,6 +1,8 @@
-//
-// Copyright 2024 by Berniev.
-//
+/*
+ Copyright (c) 2024 Berniev
+
+ Licence: MIT
+ */
 
 #ifndef SQLITE_CPP_H
 #define SQLITE_CPP_H
