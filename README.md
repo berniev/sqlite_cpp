@@ -1,4 +1,5 @@
-# cpp4sqlite: A C++ front-end
+# cpp4sqlite
+### A C++ front-end for SQLite
 
 sqlite is a ubiquitous single-file database offering bindings for many languages.
 
