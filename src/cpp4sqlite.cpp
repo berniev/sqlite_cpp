@@ -13,7 +13,6 @@ using namespace cpp4sqlite;
 Connection::Connection(std::string_view const name, OpenOption flags, char const* vfs)
 {
     if (auto const res {sqlite3_open_v2(name.data(), &sqliteDb, static_cast<int>(flags), vfs)}) {
-        /**/
         auto const err {sqlite3_errstr(res)};
         close();
         throw std::runtime_error(std::string {"Connection: misc error: "} + err);
