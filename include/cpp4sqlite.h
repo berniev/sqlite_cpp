@@ -7,13 +7,13 @@
 #ifndef SQLITE_CPP_H
 #define SQLITE_CPP_H
 
-
 #include <sqlite3.h>
 #include <string>
 #include <fstream>
 
 namespace cpp4sqlite
 {
+
 //--------------------------------------------------------------------------------------------------
 
 using SqlColName = std::string;
@@ -206,7 +206,6 @@ class ResultColumn
     sqlite3_stmt* stmnt {};
     int posn {};
     int type {};  // 1 SQLITE_INTEGER, 2 SQLITE_FLOAT, 3 SQLITE_TEXT, 4 SQLITE_BLOB, 5 SQLITE_NULL
-
 
 public:
     ResultColumn(sqlite3_stmt* stmnt, int posn);
