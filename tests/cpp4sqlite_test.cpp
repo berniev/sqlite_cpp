@@ -38,6 +38,7 @@ class SqlTests: public testing::Test
 {
 protected:
     static std::unique_ptr<Connection> connection;
+
     static void SetUpTestSuite()
     {
         connection->quickQuery(createQueryStr);
@@ -278,6 +279,23 @@ TEST_F(SqlTests, rowT_without_value_calls_where_optional_has_value)
             .rowT<std::string, std::string, int, double>()
             .value();
 
+    EXPECT_EQ("row21", key);
+    EXPECT_EQ("two", str);
+    EXPECT_EQ(2, intVal);
+    EXPECT_EQ(2.2, doubleVal);
+}
+
+TEST_F(SqlTests, rowT_without_value_calls_checking_for_optional_value)
+{
+    auto res =
+        connection
+            ->prepare(
+                "SELECT text_col_key, text_col, int_col, float_col FROM Test WHERE int_col = ?")
+            .execute(2)
+            .rowT<std::string, std::string, int, double>();
+
+    EXPECT_TRUE(res.has_value());
+    auto [key, str, intVal, doubleVal] = res.value();
     EXPECT_EQ("row21", key);
     EXPECT_EQ("two", str);
     EXPECT_EQ(2, intVal);
