@@ -1,5 +1,4 @@
-include(CTest)
-include(GoogleTest)
+enable_testing()
 
 add_executable(Tests
         cpp4sqlite_test.cpp
@@ -12,4 +11,3 @@ target_link_libraries(Tests PUBLIC
         GTest::gtest_main
         cpp4sqlite
 )
-gtest_discover_tests(Tests)
