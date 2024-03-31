@@ -995,10 +995,10 @@ TEST_F(SqlTests, blob_from_std_string_containing_nulls)
 
 TEST_F(SqlTests, blob_from_and_to_file)
 {
-    std::filesystem::path const filePathSrc {"../stuff/Test.jpg"};
+    std::filesystem::path const filePathSrc {"stuff/Test.jpg"};
     auto const sizeSrc = file_size(filePathSrc);
 
-    std::filesystem::path const filePathDes {"../stuff/TestCopy.jpg"};
+    std::filesystem::path const filePathDes {"stuff/TestCopy.jpg"};
 
     connection->prepare("INSERT INTO Test VALUES (?, ?, ?, ?, ?)")
         .execute("row812", "€son", 9999, 8.8, filePathSrc);
@@ -1015,10 +1015,10 @@ TEST_F(SqlTests, blob_from_and_to_file)
 
 TEST_F(SqlTests, blob_from_and_to_file_replace)
 {
-    std::filesystem::path const filePathSrc {"../stuff/Test.jpg"};
+    std::filesystem::path const filePathSrc {"stuff/Test.jpg"};
     auto const sizeSrc = file_size(filePathSrc);
 
-    std::filesystem::path const filePathDes {"../stuff/TestCopy.jpg"};
+    std::filesystem::path const filePathDes {"stuff/TestCopy.jpg"};
     copy_file(filePathSrc, filePathDes);
 
     connection->prepare("INSERT INTO Test VALUES (?, ?, ?, ?, ?)")
