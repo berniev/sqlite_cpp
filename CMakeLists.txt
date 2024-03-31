@@ -12,5 +12,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(SQLite3 REQUIRED)
 
 add_subdirectory(src)
-add_subdirectory(ext/googletest)
+add_subdirectory(ext)
 add_subdirectory(tests)

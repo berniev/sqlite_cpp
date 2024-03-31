@@ -1,3 +1,5 @@
+include(CTest)
+
 add_executable(Tests
         cpp4sqlite_test.cpp
 )
