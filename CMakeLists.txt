@@ -6,6 +6,6 @@ project(cpp4sqlite,
         LANGUAGES CXX
 )
 
-add_subdirectory(src)
 add_subdirectory(ext)
+add_subdirectory(src)
 add_subdirectory(tests)
