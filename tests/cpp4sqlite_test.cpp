@@ -4,9 +4,12 @@
  Licence: MIT
  */
 
-#include <gtest/gtest.h>
-#include <cpp4sqlite.h>
+#include <algorithm>
+#include <filesystem>
 #include <memory>
+
+#include <cpp4sqlite.h>
+#include <gtest/gtest.h>
 
 using namespace cpp4sqlite;
 
