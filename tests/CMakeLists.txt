@@ -1,5 +1,3 @@
-enable_testing()
-
 add_executable(Tests
         cpp4sqlite_test.cpp
 )
