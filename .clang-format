@@ -51,7 +51,7 @@ PackConstructorInitializers: Never
 PointerAlignment: Left
 ReflowComments: true
 SeparateDefinitionBlocks : Always
-SortIncludes: Never
+SortIncludes: CaseSensitive
 SpaceAfterCStyleCast: false
 SpaceAfterLogicalNot: false
 SpaceAfterTemplateKeyword: false
