@@ -9,7 +9,7 @@ sqlite does not have a pure C++ interface. It does however offer a C/C++ interfa
 #### Connection constructor:
     Connection(locn, option)   -> Connection
     // locn typically std::string or ":memory:"
-    // option typically OpenOption::CREATEWRITE or OpenOption::READWRITE
+    // option typically OpenOption::CREATERW or OpenOption::READWRITE
 #### _Connection_ functions:
     // Single shot, can contain multiple queries separated by semicolon
     quickQuery(queryString)    -> std::vector<std::vector<std::pair<std::string, std::string>>>
