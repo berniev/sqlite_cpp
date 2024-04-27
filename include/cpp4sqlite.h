@@ -7,9 +7,9 @@
 #ifndef SQLITE_CPP_H
 #define SQLITE_CPP_H
 
+#include <fstream>
 #include <sqlite3.h>
 #include <string>
-#include <fstream>
 
 namespace cpp4sqlite
 {
