@@ -10,6 +10,8 @@
 #include <fstream>
 #include <sqlite3.h>
 #include <string>
+#include <optional>
+#include <vector>
 
 namespace cpp4sqlite
 {
